@@ -1,0 +1,52 @@
+<!--
+  Generated template for the FormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><span *ngIf="!edited">Add Item</span>
+      <span *ngIf="edited">Edit Item</span></ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closePressed()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<form [formGroup]="todo" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label floating>Todo</ion-label>
+      <ion-input type="text" formControlName="item" [(ngModel)]="newItem.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea formControlName="description" [(ngModel)]="newItem.details"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Start Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" formControlName="startDate" [(ngModel)]="newItem.startDate"></ion-datetime>
+      
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Due Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" formControlName="dueDate"  [(ngModel)]="newItem.dueDate" ></ion-datetime>
+
+    </ion-item>
+    <ion-buttons end>
+
+      <button ion-button round type="submit" [disabled]="!todo.valid" (click)="addPressed()">
+        <span *ngIf="edited">Edit</span>
+        <span *ngIf="!edited">Add</span>
+      </button>
+    </ion-buttons>
+  </form>
+
+  You have entered {{newItem?.name}}, {{newItem?.details}}, {{newItem?.startDate}}, {{newItem?.dueDate}}
+</ion-content>
